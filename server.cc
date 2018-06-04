@@ -17,7 +17,7 @@
 #include "connection.hpp" // Must come before boost/serialization headers.
 #include <boost/serialization/vector.hpp>
 
-#include "APVT.h"
+#include "gnss_synchro.h"
 
 /// Serves stock quote information to any client that connects to it.
 class server
