@@ -1,5 +1,5 @@
 # gnss_synchro_tcp
-Serializaion example of Gnss_Synchro objects
+Serializaion example of Gnss_Synchro objects over TCP
 
 **Server**
 ---
