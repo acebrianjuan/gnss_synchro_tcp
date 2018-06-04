@@ -30,30 +30,12 @@ public:
         boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
   {
     // Create the data to be sent to each client.
-      // This is a test Attitude, Position Velocity and Time server
-    APVT s;
-      struct timeval read_time;
-      s.HW_ID=1; //hardware ID
-      s.H= 58.3624; //WGS84 Altitude (m)
-      s.Lat= 41.2749; //WGS84 Latitude (deg)
-      s.Long=1.9875; //WGS84 Longitude (deg)
-      s.eul[0]=0.23; //roll (radians)
-      s.eul[1]=-0.15; //pitch (radians)
-      s.eul[2]=0.01; //yaw (radians)
-      s.v[0]=0; //ECEF velocity X (m/s)
-      s.v[1]=0; //ECEF velocity Y (m/s)
-      s.v[2]=0; //ECEF velocity Z (m/s)
-      s.r[0]=4.797665934700000e6;//ECEF position X (m)
-      s.r[1]=0.166493057100000e6;//ECEF position Y (m)
-      s.r[2]=4.185450552700000e6;//ECEF position Z (m)
-      s.reliability=4; //Position and attitude reliability level (0-4)
-      for(int i=0;i<10;i++) {
-          gettimeofday(&read_time, NULL);
-          s.time=read_time.tv_sec;
-          s.sec=(float)read_time.tv_usec / 1000000.0;
-          stocks_.push_back(s);
-          sleep(1);
-      }
+      // This is a sample Gnss_Synchro object used for testing.
+	  Gnss_Synchro gnss_synchro = Gnss_Synchro();
+	  gnss_synchro.Channel_ID = 0;
+	  gnss_synchro.System = 'G';
+	  stocks_.push_back(gnss_synchro);
+
     // Start an accept operation for a new connection.
     connection_ptr new_conn(new connection(acceptor_.get_io_service()));
     acceptor_.async_accept(new_conn->socket(),
@@ -100,7 +82,7 @@ private:
   boost::asio::ip::tcp::acceptor acceptor_;
 
   /// The data to be sent to each client.
-  std::vector<APVT> stocks_;
+  std::vector<Gnss_Synchro> stocks_;
 };
 
 
