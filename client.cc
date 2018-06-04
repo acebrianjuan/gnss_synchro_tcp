@@ -70,27 +70,9 @@ public:
         if (!e) {
             // Print out the data that was received.
             for (std::size_t i = 0; i < stocks_.size(); ++i) {
-                std::cout << "APVT packet number " << i << "\n";
-                char buf[80];
-                tstruct = *gmtime(&stocks_[i].time);
-                double seconds = tstruct.tm_sec + stocks_[i].sec;
-                strftime(buf, sizeof(buf), "%Y/%m/%d %H:%M:", &tstruct);
-                std::string str_time = std::string(buf);
-                std::cout << "Position timestamp: " << str_time << seconds << std::endl;
-                std::cout << " HW ID= "<<stocks_[i].HW_ID << std::endl;
-                std::cout << "WGS84 Latitude= "<<stocks_[i].Lat << " [deg]"<<std::endl;
-                std::cout << "WGS84 Longitude= "<<stocks_[i].Long << " [deg]"<< std::endl;
-                std::cout << "WGS84 Altitude= "<<stocks_[i].H <<  " [m]"<<std::endl;
-                std::cout << "ECEF Position X= "<<stocks_[i].r[0] << " [m]"<< std::endl;
-                std::cout << "ECEF Position Y= "<<stocks_[i].r[1] << " [m]"<< std::endl;
-                std::cout << "ECEF Position Z= "<<stocks_[i].r[2] << " [m]"<< std::endl;
-                std::cout << "ECEF Velocity X= "<<stocks_[i].v[0] << " [m/s]"<< std::endl;
-                std::cout << "ECEF Velocity Y= "<<stocks_[i].v[1] << " [m/s]"<< std::endl;
-                std::cout << "ECEF Velocity Z= "<<stocks_[i].v[2] << " [m/s]"<< std::endl;
-                std::cout << "Attitude Roll= "<<stocks_[i].eul[0] << " [rad]"<<std::endl;
-                std::cout << "Attitude Pitch= "<<stocks_[i].eul[1] <<" [rad]"<< std::endl;
-                std::cout << "Attitude Yaw= "<<stocks_[i].eul[2] <<" [rad]"<< std::endl;
-                std::cout << "Position and Attitude reliability level= "<<stocks_[i].reliability << std::endl;
+                std::cout << "Gnss_Synchro packet number " << i << "\n";
+                std::cout << "Channel_ID= "<<stocks_[i].Channel_ID << std::endl;
+                std::cout << "System= "<<stocks_[i].System << " [deg]"<<std::endl;
                 connection_.async_read(stocks_,
                                        boost::bind(&client::handle_read, this,
                                                    boost::asio::placeholders::error));
@@ -109,7 +91,7 @@ private:
     connection connection_;
 
     /// The data received from the server.
-    std::vector<APVT> stocks_;
+    std::vector<Gnss_Synchro> stocks_;
 };
 
 
