@@ -72,7 +72,7 @@ public:
             for (std::size_t i = 0; i < stocks_.size(); ++i) {
                 std::cout << "Gnss_Synchro packet number " << i << "\n";
                 std::cout << "Channel_ID= "<<stocks_[i].Channel_ID << std::endl;
-                std::cout << "System= "<<stocks_[i].System << " [deg]"<<std::endl;
+                std::cout << "System= "<<stocks_[i].System <<std::endl;
                 connection_.async_read(stocks_,
                                        boost::bind(&client::handle_read, this,
                                                    boost::asio::placeholders::error));
